@@ -1,13 +1,12 @@
----
-title: Welcome to Middleman
----
+<% blog.articles.each_with_index do |article, i| %>
+  <div class="post-preview">
+    <% link_to article do %>
+      <h2 class="post-title"><%= article.title %></h2>
+      <h4 class="post-subtitle"><%= article.summary(250, '...') %></h4>
+    <% end %>
+    <p class="post-meta"><%= article.date.strftime('%B %e, %Y') %></p>
+    <hr>
 
-<div class="welcome">
-  <div class="logo">
-    <%= image_tag "middleman-logo.svg" %>
   </div>
-  <h1>Middleman is Running</h1>
-  <p class="doc">
-    <%= link_to "Read Documentation Online", "https://middlemanapp.com", target: "_blank" %>
-  </p><!-- .doc -->
-</div><!-- .welcome -->
+<% end %>
+
