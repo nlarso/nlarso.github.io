@@ -9,7 +9,7 @@ gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
 # Middleman Gems
-gem 'middleman-core'
-gem 'middleman-cli'
-gem 'middleman-livereload'
-gem 'middleman-blog'
+gem 'middleman', '~> 3.3.12'
+gem 'middleman-blog', '~> 3.5.3'
+gem 'middleman-livereload', '~> 3.3.0'
+gem 'nokogiri'
