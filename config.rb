@@ -9,6 +9,8 @@ activate :blog do |blog|
   blog.page_link = 'page/{num}'
 end
 
+activate :directory_indexes
+
 configure :development do
   activate :livereload
 end
