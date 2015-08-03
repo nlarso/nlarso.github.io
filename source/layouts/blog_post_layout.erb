@@ -2,7 +2,9 @@
   <article>
     <div class='post-preview'>
       <h1 class="post-title"><%= current_article.title %></h1>
+      <p class="post-meta"><%= current_article.date.strftime('%B %e, %Y') %></p>
     </div>
+    <hr>
     <%= yield %>
   </article>
   <div class='disqus_container'>
