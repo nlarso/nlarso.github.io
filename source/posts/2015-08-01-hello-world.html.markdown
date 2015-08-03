@@ -1,7 +1,11 @@
 ---
 title: Hello World!
 date: 2015-08-01
-tags: example
+tags: misc
 ---
 
-Tumblr you probably haven't heard of them salvia stumptown, four loko synth Shoreditch fap brunch cray narwhal meggings cred quinoa. Williamsburg fap leggings dreamcatcher. Tattooed ethical cronut polaroid, kale chips pork belly ugh deep v gentrify semiotics McSweeney's mumblecore farm-to-table four loko church-key. Actually twee slow-carb fanny pack.Williamsburg street art plaid Vice twee fashion axe. Scenester Intelligentsia Tumblr, viral authentic taxidermy distillery Vice fanny pack selvage DIY lo-fi Schlitz yr beard. Sustainable bespoke stumptown, cold-pressed semiotics brunch paleo Kickstarter wolf craft beer health goth authentic.
+Hello world! Again! My last blog post was in 2012, which(as of this writing) was over three years ago. I never meant to go so long without writing anything, but admittedly my attention in 2012 was much more focused on finishing the last year of my undergraduate degree than it was on updating this blog.
+
+Excuses aside, I'm ready to start blogging again. I've rebuilt this website in _Middleman_ and ditched _Wordpress_(More details on the how and why in my next post, I promise).
+
+Until then, check out my [about me](/about) page to see what I've been up to for the past three years.
