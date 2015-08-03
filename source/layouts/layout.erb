@@ -42,11 +42,6 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-          <% if current_article %>
-            <div class='post-preview'>
-              <h1 class="post-title"><%= current_article.title %></h1>
-            </div>
-          <% end %>
           <%= yield %>
         </div>
       </div>
@@ -54,7 +49,7 @@
 
     <%= partial 'layouts/footer' %>
 
-    <%= javascript_include_tag :all %>
+    <%= javascript_include_tag 'jquery.min', 'bootstrap.min' %>
 
   </body>
 </html>

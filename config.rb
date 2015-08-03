@@ -1,6 +1,7 @@
 page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
+page 'posts/*', layout: :blog_post_layout
 
 activate :blog do |blog|
   blog.prefix = 'posts'
