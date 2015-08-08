@@ -1,0 +1,309 @@
+---
+title: Switching from Wordpress to Middleman
+date: 2015-08-07
+tags: ruby, middleman
+---
+
+I recently completely redesigned this site and rebuilt it using Middleman, a static site generator built with Ruby. Along with the redesign, the site is now hosted for free on GitHub Pages.
+
+## Background
+
+This site was previously a WordPress blog hosted on HostGator. Although there wasn't anything _terrible_ about Wordpress, it was kind of annoying to maintain, so I rarely made changes to the design or page layouts. The page load speed also left something to be desired.
+
+Admittedly, I'm not a WordPress expert, so this was probably on me. The thing is, I didn't really _want_ to be a Wordpress expert. I didn’t really _need_ WordPress for what I was doing and I didn't want to spend a lot of time learning how to configure it correctly.
+
+What I really wanted to do was quickly manage my design so I could focus on writing. Enter static site generators.
+
+## Why Middleman?
+
+There are a [crap load] (https://github.com/pinceladasdaweb/Static-Site-Generators) of static site generators out there, so Why did I choose Middleman?
+
+When I started _shopping_ for the right tool for me, there were several things I was looking for:
+
+- The ability to write my blog posts in Markdown. I don't enjoy using WYSIWIG editors. At all.
+- Support for Github Pages and the ability to quickly deploy from the command line.
+- Support for any front-end tools I feel like using (haml, erb, coffeescript, sass, etc.)
+
+I also wanted a static site generator to be built in a language I'm familiar with. I'm a Ruby on Rails developer so Middleman and Jekyll were my top choices(since they are both built on Ruby).
+
+Middleman and Jekyll both offer roughly the same features and the biggest difference I noticed was what comes out of the box by default.
+
+For example, Jekyll includes built-in support for blogging and Github Pages while Middleman offers support for both through extensions that need to be activated. Similarly, Middleman includes [Sprockets] (https://github.com/sstephenson/sprockets) by default, while Jekyll offers support through an extension.
+
+I played around with both and ultimately ended up choosing Middleman simply because I liked the workflow more. Middleman bears a striking resemblence to working on a rails project.
+
+
+## Middleman Installation
+
+Middleman is distributed using the RubyGems package manager. This means you will need both the Ruby language runtime installed and RubyGems to begin using Middleman.
+
+For the purposes of this tutorial, I’m going to assume you're comfortable working from the command line and are familiar with install gems.
+
+Let’s start by installing the Middleman gem:
+
+```bash
+  $ gem install middleman
+```
+
+This will install Middleman, its dependencies and the command-line tools for using Middleman.
+
+It may take a few minutes so be patient.
+
+## Generate a Middleman project
+
+Once Middleman has finished installing, we can create a new project with:
+
+```bash
+  $ middleman init name_of_project options
+```
+
+To view view what options are available when creating a new Middleman project, run init with the `--help` flag:
+
+```bash
+  $ middleman init --help
+
+  Usage:
+    middleman init NAME [options]
+
+  Options:
+    -T, [--template=TEMPLATE]                  # Use a project template: default, html5, mobile, smacss, empty
+                                               # Default: default
+        [--css-dir=CSS_DIR]                    # The path to the css files
+        [--js-dir=JS_DIR]                      # The path to the javascript files
+        [--images-dir=IMAGES_DIR]              # The path to the image files
+        [--rack], [--no-rack]                  # Include a config.ru file
+        [--skip-gemfile], [--no-skip-gemfile]  # Don't create a Gemfile
+    -B, [--skip-bundle], [--no-skip-bundle]    # Don't run bundle install
+        [--skip-git], [--no-skip-git]          # Skip Git ignores and keeps
+        [--force]                              # Overwrite existing files without any question
+```
+
+Let's create a project with using the default settings:
+
+```bash
+  $ middleman init my_awesome_project
+```
+
+Once that is complete, we can `cd` into the newly created `my_awesome_project/` directory and start up the Middleman server:
+
+```bash
+$ bundle exec middleman server
+```
+
+Once the server is up and running we can visit `http://localhost:4567/` in our browser to view our project:
+
+<%= image_tag '2015-08-07-switching-from-wordpress-to-middleman/New-Middleman-Project-Page.jpg',
+    alt: 'New Middleman Project',
+    class: 'img-responsive center-block'
+%>
+
+Our project directory will look something like this:
+
+```bash
+.
+├── .gitignore
+├── Gemfile
+├── Gemfile.lock
+├── config.rb
+└── source
+    ├── images
+    │   ├── background.png
+    │   └── middleman.png
+    ├── index.html.erb
+    ├── javascripts
+    │   └── all.js
+    ├── layouts
+    │   └── layout.erb
+    └── stylesheets
+        ├── all.css
+        └── normalize.css
+```
+
+The `config.rb` file is where most project configuration will be done. This file contains commented documentation on how to enable some features. We can navigate to `http://localhost:4567/__middleman/config/` to see all of the settings and extensions available.
+
+The `source/` directory contains the main website source files to be built, including templates javascript, CSS and images.
+
+The `build/` directory is where our static website files will be compiled and exported to. This folder doesn't exist yet because we haven't run the `middleman build` command, so let's do that now.
+
+```bash
+$ bundle exec middleman build
+```
+
+Now our project contains the `build/` directory:
+
+```bash
+── build
+   ├── images
+   │   ├── background.png
+   │   └── middleman.png
+   ├── index.html
+   ├── javascripts
+   │   └── all.js
+   └── stylesheets
+       ├── all.css
+       └── normalize.css
+```
+
+## Digging Deeper
+
+
+We now have the basics of Middleman covered (creating, previewing and building the project), but there’s a lot more we can do. I'll go over a few features of Middleman, but be sure to check out the [official documentation] (https://middlemanapp.com/basics/install/) to learn more.
+
+### Adding More Pages
+
+Our new project contains only one page, `index.html.erb`, but adding additional pages is an easy as creating `.html.erb` files in the `source/` directory. Middleman also ships with support for [Haml](http://haml.info/) out of box, so feel free to use that if you prefer.
+
+### Layouts
+
+When we created our project, a `layouts/layout.erb` file was created:
+
+```erb
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title><%%= current_page.data.title || "The Middleman" %></title>
+
+    <%%= stylesheet_link_tag "normalize", "all" %>
+    <%%= javascript_include_tag  "all" %>
+  </head>
+
+  <body class="<%%= page_classes %>">
+    <%%= yield %>
+  </body>
+</html>
+```
+This is the layout for our project and all pages will use it by default. We can define any shared content(headers, footers, etc.) here and any pages using this layout will add their contents in the `yield` call.
+
+Middleman supports multiple layouts as well as nested layouts. Read more [here](https://middlemanapp.com/basics/layouts/).
+
+### Frontmatter
+
+If we look at the `index.html.erb` file, we will see this:
+
+```erb
+---
+title: Welcome to Middleman
+---
+```
+This is our frontmatter. Frontmatter is page-specific data that we can specify in YAML or JSON format. In the example above, we could use `current_page.data.title` to access 'Welcome to Middleman'.
+
+We can also define other data, such as lists, in the frontmatter:
+
+```erb
+---
+people_named_nick:
+  - Nick Cage
+  - Nick Larson
+  - Nick Offerman
+---
+
+<h1>People Named Nick</h1>
+<ul>
+  <%% current_page.data.people_named_nick.each do |f| %>
+    <li><%%= f %></li>
+  <%% end %>
+</ul>
+
+```
+Lastly, we can define a custom layout for a single page with:
+
+```erb
+---
+layout: 'my_awesome_layout'
+---
+```
+
+### Template Helpers
+Template helpers are methods which we can used to simplify common HTML tasks. Most of the basic methods should look familiar to anyone who has use Ruby on Rails.
+
+These helpers are built on the Padrino framework. I'll list a few commone helpers here, but you can view the full list in the [Padrino Documentation](http://www.padrinorb.com/guides/application-helpers).
+
+__To display a link:__
+
+```erb
+<%%= link_to 'Cat Pictures', '/cats.html' %>
+```
+
+__To display an image:__
+
+```erb
+<%%= image_tag 'orange-cat.png' %>
+```
+(Middleman will look for this image in the images directory by default)
+
+__To link to external stylesheets(as seen in `layouts/layout.erb`):__
+
+```erb
+<%%= stylesheet_link_tag "normalize", "all" %>
+```
+
+### Directory Indexes(Pretty Urls)
+
+By default, creating an `about.html.erb` file in the `source/` folder will be output as `about.html` when we build the project. This page would then be accessed by navigating to:
+
+```
+http://localhost:4567/about.html
+```
+
+If the Directory Indexes extension is activated, the `about.html.erb` page will instead be output as `about/index.html` when we build the project and would be accessed by navigating to:
+
+```
+http://localhost:4567/about/
+```
+
+Add the following to the `config.rb` file to activate Directory Indexes:
+
+```ruby
+activate :directory_indexes
+```
+
+__Note:__ Your web server must support "index files". Read more [here](https://middlemanapp.com/advanced/pretty_urls/).
+
+### Markdown
+
+Aside from ERb and Haml, we can also write our page content in Markdown. If we create a `some-page.html.markdown` file, Middleman will render `some-page.html` using whatever Markdown engine we specify. Middleman uses Kramdown by default, but it can easily be changed. For example, to install RedCarpet, we would install the RedCarpet gem by adding this to our Gemfile:
+
+```
+gem 'redcarpet'
+```
+
+We would then need to set it as our default Markdown engine in `config.rb`:
+
+```ruby
+set :markdown_engine, :redcarpet
+```
+
+### Blogging
+
+__Note:__ Middleman has an official extension to support blogging, articles and tagging. The `middleman-blog` extension can be added to an existing project by specifying the `middleman-blog` gem in the Gemfile:
+
+```ruby
+gem "middleman-blog"
+```
+
+After running `bundle install`, we need to activate the extension in `config.rb`:
+
+```ruby
+activate :blog do |blog|
+  # blog options go here
+end
+```
+
+There are several options for customizing our blog. Navigate to `http://localhost:4567/__middleman/config/#extension` to see the available options.
+
+## To Be Continued...
+
+There are several other features & options that I haven't even mentioned yet, such as:
+
+- LiveReload
+- Syntax Highlighting
+- Deploying to Github Pages
+- Advanced blog configuration
+
+I will touch on these topics in future posts. Thanks for reading!
