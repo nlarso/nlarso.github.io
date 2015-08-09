@@ -1,15 +1,17 @@
 ---
  title: Software Developer in St. George, UT
 ---
-
+<div class="list-group">
 <% blog.articles.each_with_index do |article, i| %>
-  <div class="post-preview">
-    <% link_to article do %>
-      <h2 class="post-title"><%= article.title %></h2>
-    <% end %>
-    <h4 class="post-meta"><%= article.date.strftime('%B %e, %Y') %></h4>
-    <p class="post-subtitle">
-      <span><%= article.summary(250, '...') %></span>
-    </p>
+    <div class="post-preview">
+      <% link_to article, class: 'list-group-item' do %>
+        <h2 class="post-title"><%= article.title %></h2>
+        <h4 class="post-meta"><%= article.date.strftime('%B %e, %Y') %></h4>
+      <% end %>
+
+    <!-- <p class="post&#45;subtitle"> -->
+      <!-- <span><%= article.summary(250, '...') %></span> -->
+    <!-- </p> -->
   </div>
 <% end %>
+</div>
