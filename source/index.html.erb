@@ -6,9 +6,8 @@
   <div class="post-preview">
     <% link_to article do %>
       <h2 class="post-title"><%= article.title %></h2>
-      <h4 class="post-subtitle"><%= article.summary(250, '...') %></h4>
     <% end %>
-    <p class="post-meta"><%= article.date.strftime('%B %e, %Y') %></p>
-    <hr>
+    <h4 class="post-meta"><%= article.date.strftime('%B %e, %Y') %></h4>
+    <p class="post-subtitle"><%= article.summary(250, '...') %></p>
   </div>
 <% end %>
