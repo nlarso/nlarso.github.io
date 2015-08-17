@@ -16,8 +16,4 @@
       <loc>http://nick-larson.net/posts/2015/08/01/hello-world</loc>
       <priority>0.7</priority>
     </url>
-    <url>
-      <loc>http://nick-larson.net/posts/2015/08/08/migrating-from-wordpress-to-middleman</loc>
-      <priority>0.7</priority>
-    </url>
 </urlset>
