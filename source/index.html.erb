@@ -8,6 +8,8 @@
       <h2 class="post-title"><%= article.title %></h2>
     <% end %>
     <h4 class="post-meta"><%= article.date.strftime('%B %e, %Y') %></h4>
-    <p class="post-subtitle"><%= article.summary(250, '...') %></p>
+    <p class="post-subtitle">
+      <span><%= article.summary(250, '...') %></span>
+    </p>
   </div>
 <% end %>

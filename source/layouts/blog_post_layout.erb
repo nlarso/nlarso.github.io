@@ -1,12 +1,9 @@
 <% wrap_layout :layout do %>
-  <article>
-    <div class='post-preview'>
-      <h1 class="post-title"><%= current_article.title %></h1>
-      <p class="post-meta"><%= current_article.date.strftime('%B %e, %Y') %></p>
-    </div>
-    <hr>
+  <div class='post-preview'>
+    <h1 class="post-title"><%= current_article.title %></h1>
+    <h4 class="post-meta"><%= current_article.date.strftime('%B %e, %Y') %></h4>
+  </div>
     <%= yield %>
-  </article>
   <div class='disqus_container'>
     <%= partial 'layouts/comments' %>
   </div>
